@@ -6,6 +6,8 @@ from dash.dependencies import Input, Output
 import pandas
 import plotly.express as px
 
+import layouts
+
 df_heistCurrency = pandas.read_csv("Data/Heist.2020-09-18.2021-01-11.currency.csv", sep=';', parse_dates=['Date'])
 df_ritualCurrency = pandas.read_csv("Data/Ritual.2021-01-15.2021-04-12.currency.csv", sep=';', parse_dates=['Date'])
 # print(df_ritualCurrency.dtypes)
@@ -30,81 +32,9 @@ index_page = html.Div([
     dcc.Link('Navigate to "/catalysts"', href='/catalysts'),
 ])
 
-currencyLayout = html.Div([
-    html.H1("PoE Data Visualization using Dash", style={'text-align': 'center'}),
+currencyLayout = layouts.currencyLayout()
 
-    dcc.Dropdown(
-        id='league-dropdown',
-        options=[
-            {'label': 'Ritual SC', 'value': 'Ritual'},
-            {'label': 'Heist SC', 'value': 'Heist'},
-        ],
-        multi=False,
-        value='Ritual',
-        style={'width': '40%'},
-        clearable=False,
-    ),
-    html.Div(id='league-output-container', children=[]),
-
-    dcc.Dropdown(
-        id='currency-dropdown',
-        options=[
-            # label is what the user sees. value is the value that matches the data in the dataset
-            {'label': 'Orb of Alteration', 'value': 'Orb of Alteration'},
-            {'label': 'Exalted Orb', 'value': 'Exalted Orb'},
-            {'label': 'Orb of Fusing', 'value': 'Orb of Fusing'},
-            {'label': 'Divine Orb', 'value': 'Divine Orb'},
-            {'label': 'Blessed Orb', 'value': 'Blessed Orb'},
-        ],
-        multi=True,
-        value=['Orb of Alteration'],
-        style={'width': "40%"},
-    ),
-
-    html.Div(id='currency-output-container', children=[]),
-    html.Br(),
-
-    dcc.Graph(id='Graph1', figure={})
-])
-
-catalystLayout = html.Div([
-    html.H1("PoE Data Visualization using Dash", style={'text-align': 'center'}),
-
-    dcc.Dropdown(
-        id='league-dropdown',
-        options=[
-            {'label': 'Ritual SC', 'value': 'Ritual'},
-            {'label': 'Heist SC', 'value': 'Heist'},
-        ],
-        multi=False,
-        value='Ritual',
-        style={'width': '40%'},
-        clearable=False,
-    ),
-    html.Div(id='league-output-container', children=[]),
-
-    dcc.Dropdown(
-        id='currency-dropdown',
-        options=[
-            # label is what the user sees. value is the value that matches the data in the dataset
-            {'label': 'Fertile Catalyst', 'value': 'Fertile Catalyst'},
-            {'label': 'Intrinsic Catalyst', 'value': 'Intrinsic Catalyst'},
-            {'label': 'Abrasive Catalyst', 'value': 'Abrasive Catalyst'},
-            {'label': 'Tempering Catalyst', 'value': 'Tempering Catalyst'},
-            {'label': 'Turbulent Catalyst', 'value': 'Turbulent Catalyst'},
-            {'label': 'Prismatic Catalyst', 'value': 'Prismatic Catalyst'},
-            {'label': 'Imbued Catalyst', 'value': 'Imbued Catalyst'},
-        ],
-        multi=True,
-        value=['Fertile Catalyst'],
-        style={'width': "40%"},
-    ),
-
-    html.Div(id='currency-output-container', children=[]),
-    html.Br(),
-
-    dcc.Graph(id='Graph1', figure={})
-])
+catalystLayout = layouts.currencyLayout()
 
 @app.callback(
     Output(component_id='page-content', component_property='children'),
