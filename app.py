@@ -47,11 +47,13 @@ app.layout = html.Div([
             # label is what the user sees. value is the value that matches the data in the dataset
             {'label': 'Orb of Alteration', 'value': 'Orb of Alteration'},
             {'label': 'Exalted Orb', 'value': 'Exalted Orb'},
+            {'label': 'Orb of Fusing', 'value': 'Orb of Fusing'},
+            {'label': 'Divine Orb', 'value': 'Divine Orb'},
+            {'label': 'Blessed Orb', 'value': 'Blessed Orb'},
         ],
-        multi=False,
-        value='Orb of Alteration',
+        multi=True,
+        value=['Orb of Alteration'],
         style={'width': "40%"},
-        clearable=False,
     ),
 
     html.Div(id='currency-output-container', children=[]),
@@ -74,11 +76,13 @@ def update_graph(optionCurrency, optionLeague):
     leagueContainer = "The league chosen by the user was: {}".format(optionLeague)
 
     dfCopy = df_termsOfChaos.copy()
-    dfCopy = df_termsOfChaos[df_termsOfChaos["Get"] == optionCurrency] #Set the dataset to be only of the value selected
-
     dfCopy = dfCopy[dfCopy["League"] == optionLeague] # Restrict the dataset to the chosen league
 
-    fig = px.line(dfCopy, x=dfCopy["Date"], y=dfCopy["Value"])
+    if (len(optionCurrency) > 0):
+        df = dfCopy[dfCopy["Get"].isin(optionCurrency)]
+        fig = px.line(df, x=df["Date"], y=df["Value"], color=df["Get"])
+    else:
+        raise dash.exceptions.PreventUpdate # don't update the graph if all options are removed
 
     return currencyContainer, leagueContainer, fig
 
