@@ -30,11 +30,13 @@ index_page = html.Div([
     dcc.Link('Navigate to "/currency"', href='/currency'),
     html.Br(),
     dcc.Link('Navigate to "/catalysts"', href='/catalysts'),
+    html.Br(),
+    dcc.Link('Navigate to "/breachstones"', href='/breachstones'),
 ])
 
 currencyLayout = layouts.currencyLayout()
-
 catalystLayout = layouts.currencyLayout()
+breachstoneLayout = layouts.breachstoneLayout()
 
 @app.callback(
     Output(component_id='page-content', component_property='children'),
@@ -45,6 +47,8 @@ def display_page(pathname):
         return currencyLayout
     elif (pathname == '/catalysts'):
         return catalystLayout
+    elif (pathname == '/breachstones'):
+        return breachstoneLayout
     else:
         return index_page
 

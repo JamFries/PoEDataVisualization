@@ -106,3 +106,56 @@ def catalystLayout():
 
         dcc.Graph(id='Graph1', figure={})
     ])
+
+def breachstoneLayout():
+    return html.Div([
+        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center'}),
+
+        dcc.Dropdown(
+            id='league-dropdown',
+            options=[
+                {'label': 'Ritual SC', 'value': 'Ritual'},
+                {'label': 'Heist SC', 'value': 'Heist'},
+            ],
+            multi=False,
+            value='Ritual',
+            style={'width': '40%'},
+            clearable=False,
+        ),
+        html.Div(id='league-output-container', children=[]),
+
+        dcc.Dropdown(
+            id='currency-dropdown',
+            options=[
+                # label is what the user sees. value is the value that matches the data in the dataset
+                {'label': "Esh's Breachstone", 'value': "Esh's Breachstone"},
+                {'label': "Esh's Charged Breachstone", 'value': "Esh's Charged Breachstone"},
+                {'label': "Esh's Enriched Breachstone", 'value': "Esh's Enriched Breachstone"},
+                {'label': "Esh's Pure Breachstone", 'value': "Esh's Pure Breachstone"},
+                {'label': "Tul's Breachstone", 'value': "Tul's Breachstone"},
+                {'label': "Tul's Charged Breachstone", 'value': "Tul's Charged Breachstone"},
+                {'label': "Tul's Enriched Breachstone", 'value': "Tul's Enriched Breachstone"},
+                {'label': "Tul's Pure Breachstone", 'value': "Tul's Pure Breachstone"},
+                {'label': "Xoph's Breachstone", 'value': "Xoph's Breachstone"},
+                {'label': "Xoph's Charged Breachstone", 'value': "Xoph's Charged Breachstone"},
+                {'label': "Xoph's Enriched Breachstone", 'value': "Xoph's Enriched Breachstone"},
+                {'label': "Xoph's Pure Breachstone", 'value': "Xoph's Pure Breachstone"},
+                {'label': "Uul-Netol's Breachstone", 'value': "Uul-Netol's Breachstone"},
+                {'label': "Uul-Netol's Charged Breachstone", 'value': "Uul-Netol's Charged Breachstone"},
+                {'label': "Uul-Netol's Enriched Breachstone", 'value': "Uul-Netol's Enriched Breachstone"},
+                {'label': "Uul-Netol's Pure Breachstone", 'value': "Uul-Netol's Pure Breachstone"},
+                {'label': "Chayula's Breachstone", 'value': "Chayula's Breachstone"},
+                {'label': "Chayula's Charged Breachstone", 'value': "Chayula's Charged Breachstone"},
+                {'label': "Chayula's Enriched Breachstone", 'value': "Chayula's Enriched Breachstone"},
+                {'label': "Chayula's Pure Breachstone", 'value': "Chayula's Pure Breachstone"},
+            ],
+            multi=True,
+            value=["Chayula's Breachstone"],
+            style={'width': "40%"},
+        ),
+
+        html.Div(id='currency-output-container', children=[]),
+        html.Br(),
+
+        dcc.Graph(id='Graph1', figure={})
+    ])
