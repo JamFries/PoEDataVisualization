@@ -26,13 +26,7 @@ app.layout = html.Div([
     html.Div(id='page-content'), # content will be rendered in this element
 ])
 
-index_page = html.Div([
-    dcc.Link('Navigate to "/currency"', href='/currency'),
-    html.Br(),
-    dcc.Link('Navigate to "/catalysts"', href='/catalysts'),
-    html.Br(),
-    dcc.Link('Navigate to "/breachstones"', href='/breachstones'),
-])
+index_page = layouts.index_page()
 
 currencyLayout = layouts.currencyLayout()
 catalystLayout = layouts.currencyLayout()
@@ -68,11 +62,14 @@ def update_graph(optionCurrency, optionLeague):
     leagueContainer = "The league chosen by the user was: {}".format(optionLeague)
 
     dfCopy = df_termsOfChaos.copy()
-    dfCopy = dfCopy[dfCopy["League"] == optionLeague] # Restrict the dataset to the chosen league
+    if (len(optionLeague) > 0):
+        dfCopy = dfCopy[dfCopy["League"].isin(optionLeague)] # Restrict the dataset to the chosen leagues
+    else:
+        raise dash.exceptions.PreventUpdate # no leagues were chosen so don't update the graph
 
     if (len(optionCurrency) > 0):
         df = dfCopy[dfCopy["Get"].isin(optionCurrency)]
-        fig = px.line(df, x=df["Date"], y=df["Value"], color=df["Get"])
+        fig = px.line(df, x=df["Date"], y=df["Value"], color=df["Get"], line_group=df["League"], line_dash=df["League"])
     else:
         raise dash.exceptions.PreventUpdate # don't update the graph if all options are removed
 

@@ -3,9 +3,20 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+def index_page():
+    return html.Div([
+        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center', 'background-color': 'lightblue'}),
+
+        dcc.Link('Navigate to "/currency"', href='/currency'),
+        html.Br(),
+        dcc.Link('Navigate to "/catalysts"', href='/catalysts'),
+        html.Br(),
+        dcc.Link('Navigate to "/breachstones"', href='/breachstones'),
+    ])
+
 def currencyLayout():
     return html.Div([
-        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center'}),
+        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center', 'background-color': 'lightblue'}),
 
         dcc.Dropdown(
             id='league-dropdown',
@@ -13,8 +24,8 @@ def currencyLayout():
                 {'label': 'Ritual SC', 'value': 'Ritual'},
                 {'label': 'Heist SC', 'value': 'Heist'},
             ],
-            multi=False,
-            value='Ritual',
+            multi=True,
+            value=['Ritual'],
             style={'width': '40%'},
             clearable=False,
         ),
@@ -69,7 +80,7 @@ def currencyLayout():
 
 def catalystLayout():
     return html.Div([
-        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center'}),
+        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center', 'background-color': 'lightblue'}),
 
         dcc.Dropdown(
             id='league-dropdown',
@@ -77,8 +88,8 @@ def catalystLayout():
                 {'label': 'Ritual SC', 'value': 'Ritual'},
                 {'label': 'Heist SC', 'value': 'Heist'},
             ],
-            multi=False,
-            value='Ritual',
+            multi=True,
+            value=['Ritual'],
             style={'width': '40%'},
             clearable=False,
         ),
@@ -109,7 +120,7 @@ def catalystLayout():
 
 def breachstoneLayout():
     return html.Div([
-        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center'}),
+        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center', 'background-color': 'lightblue'}),
 
         dcc.Dropdown(
             id='league-dropdown',
@@ -117,8 +128,8 @@ def breachstoneLayout():
                 {'label': 'Ritual SC', 'value': 'Ritual'},
                 {'label': 'Heist SC', 'value': 'Heist'},
             ],
-            multi=False,
-            value='Ritual',
+            multi=True,
+            value=['Ritual'],
             style={'width': '40%'},
             clearable=False,
         ),
