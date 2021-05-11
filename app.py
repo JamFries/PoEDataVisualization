@@ -80,8 +80,9 @@ def update_graph(optionCurrency, optionLeague):
 
     if (len(optionCurrency) > 0):
         df = dfCopy[dfCopy["Get"].isin(optionCurrency)]
-
-    fig = px.line(df, x=df["Date"], y=df["Value"], color=df["Get"])
+        fig = px.line(df, x=df["Date"], y=df["Value"], color=df["Get"])
+    else:
+        raise dash.exceptions.PreventUpdate # don't update the graph if all options are removed
 
     return currencyContainer, leagueContainer, fig
 
