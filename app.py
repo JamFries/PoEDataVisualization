@@ -1,3 +1,5 @@
+import datetime
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -7,10 +9,24 @@ import pandas
 import plotly.express as px
 
 import layouts
+import main
 
 df_heistCurrency = pandas.read_csv("Data/Heist.2020-09-18.2021-01-11.currency.csv", sep=';', parse_dates=['Date'])
 df_ritualCurrency = pandas.read_csv("Data/Ritual.2021-01-15.2021-04-12.currency.csv", sep=';', parse_dates=['Date'])
-# print(df_ritualCurrency.dtypes)
+
+# print(df_ritualCurrency.head())
+# Add a new column in the dataset for adjusted dates (to allow for overlapping of separate leagues on the same graph)
+df_ritualCurrency['daysIntoLeague'] = 0
+df_heistCurrency['daysIntoLeague'] = 0
+# print(df_ritualCurrency.head())
+
+for index, row_series in df_ritualCurrency.iterrows():
+    df_ritualCurrency.at[index, 'daysIntoLeague'] = main.adjustDate(row_series['League'], row_series['Date'])
+
+for index, row_series in df_heistCurrency.iterrows():
+    df_heistCurrency.at[index, 'daysIntoLeague'] = main.adjustDate(row_series['League'], row_series['Date'])
+# print(df_ritualCurrency.head())
+print("date adjusting done")
 
 df_allLeagueCurrency = pandas.concat([df_ritualCurrency, df_heistCurrency])
 
@@ -69,7 +85,7 @@ def update_graph(optionCurrency, optionLeague):
 
     if (len(optionCurrency) > 0):
         df = dfCopy[dfCopy["Get"].isin(optionCurrency)]
-        fig = px.line(df, x=df["Date"], y=df["Value"], color=df["Get"], line_group=df["League"], line_dash=df["League"])
+        fig = px.line(df, x=df["daysIntoLeague"], y=df["Value"], color=df["Get"], line_group=df["League"], line_dash=df["League"])
     else:
         raise dash.exceptions.PreventUpdate # don't update the graph if all options are removed
 

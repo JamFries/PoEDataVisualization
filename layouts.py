@@ -2,6 +2,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import dash_daq as daq
 
 def index_page():
     return html.Div([
@@ -25,7 +26,7 @@ def currencyLayout():
                 {'label': 'Heist SC', 'value': 'Heist'},
             ],
             multi=True,
-            value=['Ritual'],
+            value=['Ritual', 'Heist'],
             style={'width': '40%'},
             clearable=False,
         ),
@@ -68,7 +69,7 @@ def currencyLayout():
                 {'label': "Engineer's Orb", 'value': "Engineer's Orb"},
             ],
             multi=True,
-            value=['Orb of Alteration'],
+            value=['Exalted Orb'],
             style={'width': "40%"},
         ),
 
