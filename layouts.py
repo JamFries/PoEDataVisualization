@@ -13,6 +13,8 @@ def index_page():
         dcc.Link('Navigate to "/catalysts"', href='/catalysts'),
         html.Br(),
         dcc.Link('Navigate to "/breachstones"', href='/breachstones'),
+        html.Br(),
+        dcc.Link('Navigate to "/items"', href='/items'),
     ])
 
 def currencyLayout():
@@ -100,13 +102,13 @@ def catalystLayout():
             id='currency-dropdown',
             options=[
                 # label is what the user sees. value is the value that matches the data in the dataset
-                {'label': 'Fertile Catalyst', 'value': 'Fertile Catalyst'},
-                {'label': 'Intrinsic Catalyst', 'value': 'Intrinsic Catalyst'},
-                {'label': 'Abrasive Catalyst', 'value': 'Abrasive Catalyst'},
-                {'label': 'Tempering Catalyst', 'value': 'Tempering Catalyst'},
-                {'label': 'Turbulent Catalyst', 'value': 'Turbulent Catalyst'},
-                {'label': 'Prismatic Catalyst', 'value': 'Prismatic Catalyst'},
-                {'label': 'Imbued Catalyst', 'value': 'Imbued Catalyst'},
+                {'label': 'Fertile Catalyst', 'value': "Fertile Catalyst"},
+                {'label': 'Intrinsic Catalyst', 'value': "Intrinsic Catalyst"},
+                {'label': 'Abrasive Catalyst', 'value': "Abrasive Catalyst"},
+                {'label': 'Tempering Catalyst', 'value': "Tempering Catalyst"},
+                {'label': 'Turbulent Catalyst', 'value': "Turbulent Catalyst"},
+                {'label': 'Prismatic Catalyst', 'value': "Prismatic Catalyst"},
+                {'label': 'Imbued Catalyst', 'value': "Imbued Catalyst"},
             ],
             multi=True,
             value=['Fertile Catalyst'],
@@ -163,6 +165,40 @@ def breachstoneLayout():
             ],
             multi=True,
             value=["Chayula's Breachstone"],
+            style={'width': "40%"},
+        ),
+
+        html.Div(id='currency-output-container', children=[]),
+        html.Br(),
+
+        dcc.Graph(id='Graph1', figure={})
+    ])
+
+def itemLayout():
+    return html.Div([
+        html.H1("PoE Data Visualization using Dash", style={'text-align': 'center', 'background-color': 'lightblue'}),
+
+        dcc.Dropdown(
+            id='league-dropdown',
+            options=[
+                {'label': 'Ritual SC', 'value': 'Ritual'},
+                {'label': 'Heist SC', 'value': 'Heist'},
+            ],
+            multi=True,
+            value=['Ritual'],
+            style={'width': '40%'},
+            clearable=False,
+        ),
+        html.Div(id='league-output-container', children=[]),
+
+        dcc.Dropdown(
+            id='currency-dropdown',
+            options=[
+                # label is what the user sees. value is the value that matches the data in the dataset
+                {'label': "Kaom's Heart", 'value': "Kaom's Heart"},
+            ],
+            multi=True,
+            value=["Kaom's Heart"],
             style={'width': "40%"},
         ),
 

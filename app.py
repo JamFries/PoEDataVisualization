@@ -14,11 +14,27 @@ import main
 df_heistCurrency = pandas.read_csv("Data/updatedHeist.csv", sep=',', parse_dates=['Date'])
 df_ritualCurrency = pandas.read_csv("Data/updatedRitual.csv", sep=',', parse_dates=['Date'])
 
+# df_heistItems = pandas.read_csv("Data/updatedHeist_Items.csv", sep=',', parse_dates=['Date'])
+# df_ritualItems = pandas.read_csv("Data/updatedRitual_Items.csv", sep=',', parse_dates=['Date'])
+
+
 
 df_allLeagueCurrency = pandas.concat([df_ritualCurrency, df_heistCurrency])
 
+# df_allLeagueItems = pandas.concat([df_ritualItems, df_heistItems])
+
 # Removes rows so all data is priced in terms of chaos orbs (Ex: 1 alt = 0.3 chaos, not 0.3 chaos = 1 alt)
 df_termsOfChaos = df_allLeagueCurrency[df_allLeagueCurrency.Get != "Chaos Orb"]
+
+# df_allLeagueItems = pandas.concat([df_allLeagueItems, df_allLeagueCurrency]) # put everything into one dataset
+# print('concatenated all data together to one dataset')
+#
+# for index, row_series in df_allLeagueItems.iterrows():
+#     if (pandas.notna(row_series['Name'])): # Check if the row is an item
+#         df_allLeagueItems.at[index, 'Get'] = row_series['Name'] # Set 'Get' value equal to the item's name
+#         # This standardizes the data so we only need to access the Get column
+# print('set items Get column equal to Name column')
+
 
 
 ########################################################################################################################
@@ -32,8 +48,9 @@ app.layout = html.Div([
 index_page = layouts.index_page()
 
 currencyLayout = layouts.currencyLayout()
-catalystLayout = layouts.currencyLayout()
+catalystLayout = layouts.catalystLayout()
 breachstoneLayout = layouts.breachstoneLayout()
+itemLayout = layouts.itemLayout()
 
 @app.callback(
     Output(component_id='page-content', component_property='children'),
@@ -46,6 +63,8 @@ def display_page(pathname):
         return catalystLayout
     elif (pathname == '/breachstones'):
         return breachstoneLayout
+    elif (pathname == '/items'):
+        return itemLayout
     else:
         return index_page
 
@@ -72,7 +91,7 @@ def update_graph(optionCurrency, optionLeague):
 
     if (len(optionCurrency) > 0):
         df = dfCopy[dfCopy["Get"].isin(optionCurrency)]
-        fig = px.line(df, x=df["daysIntoLeague"], y=df["Value"], color=df["Get"], line_group=df["League"], line_dash=df["League"])
+        fig = px.line(df, x=df["daysIntoLeague"], y=df["Value"], color=df["League"], line_group=df["Get"], line_dash=df["League"])
     else:
         raise dash.exceptions.PreventUpdate # don't update the graph if all options are removed
 
