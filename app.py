@@ -11,22 +11,9 @@ import plotly.express as px
 import layouts
 import main
 
-df_heistCurrency = pandas.read_csv("Data/Heist.2020-09-18.2021-01-11.currency.csv", sep=';', parse_dates=['Date'])
-df_ritualCurrency = pandas.read_csv("Data/Ritual.2021-01-15.2021-04-12.currency.csv", sep=';', parse_dates=['Date'])
+df_heistCurrency = pandas.read_csv("Data/updatedHeist.csv", sep=',', parse_dates=['Date'])
+df_ritualCurrency = pandas.read_csv("Data/updatedRitual.csv", sep=',', parse_dates=['Date'])
 
-# print(df_ritualCurrency.head())
-# Add a new column in the dataset for adjusted dates (to allow for overlapping of separate leagues on the same graph)
-df_ritualCurrency['daysIntoLeague'] = 0
-df_heistCurrency['daysIntoLeague'] = 0
-# print(df_ritualCurrency.head())
-
-for index, row_series in df_ritualCurrency.iterrows():
-    df_ritualCurrency.at[index, 'daysIntoLeague'] = main.adjustDate(row_series['League'], row_series['Date'])
-
-for index, row_series in df_heistCurrency.iterrows():
-    df_heistCurrency.at[index, 'daysIntoLeague'] = main.adjustDate(row_series['League'], row_series['Date'])
-# print(df_ritualCurrency.head())
-print("date adjusting done")
 
 df_allLeagueCurrency = pandas.concat([df_ritualCurrency, df_heistCurrency])
 

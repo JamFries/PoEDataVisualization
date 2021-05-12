@@ -2,6 +2,8 @@ import datetime
 import pandas
 import matplotlib.pyplot as plt
 
+# Just using main.py now to rewrite the csv files to include the 'daysIntoLeague' column
+
 # Helper function that takes the date and converts it to the corresponding day of the league (Ex: 2021-01-15 -> Day 1 of ritual league)
 def adjustDate(league, date):
     if (league == "Ritual"):
@@ -415,3 +417,26 @@ def adjustDate(league, date):
             return 115
         elif (date == datetime.datetime.strptime("2021-01-11", "%Y-%m-%d")):
             return 116
+
+########################################################################################################################
+# Update csv files with daysIntoLeague column
+
+# df_heistCurrency = pandas.read_csv("Data/Heist.2020-09-18.2021-01-11.currency.csv", sep=';', parse_dates=['Date'])
+# df_ritualCurrency = pandas.read_csv("Data/Ritual.2021-01-15.2021-04-12.currency.csv", sep=';', parse_dates=['Date'])
+#
+# print(df_ritualCurrency.head())
+# Add a new column in the dataset for adjusted dates (to allow for overlapping of separate leagues on the same graph)
+# df_ritualCurrency['daysIntoLeague'] = 0
+# df_heistCurrency['daysIntoLeague'] = 0
+# print(df_ritualCurrency.head())
+#
+# for index, row_series in df_ritualCurrency.iterrows():
+#     df_ritualCurrency.at[index, 'daysIntoLeague'] = adjustDate(row_series['League'], row_series['Date'])
+#
+# for index, row_series in df_heistCurrency.iterrows():
+#     df_heistCurrency.at[index, 'daysIntoLeague'] = adjustDate(row_series['League'], row_series['Date'])
+# print(df_ritualCurrency.head())
+# print("date adjusting done")
+#
+# df_ritualCurrency.to_csv(r'ComputerPathHere\Data\updatedRitual.csv', index=False)
+# df_heistCurrency.to_csv(r'ComputerPathHere\Data\updatedHeist.csv', index=False)
