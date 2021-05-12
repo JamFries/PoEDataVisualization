@@ -11,6 +11,9 @@ import plotly.express as px
 import layouts
 import main
 
+df_metamorphCurrency = pandas.read_csv("Data/updatedMetamorph.csv", sep=',', parse_dates=['Date'])
+df_deliriumCurrency = pandas.read_csv("Data/updatedDelirium.csv", sep=',', parse_dates=['Date'])
+df_harvestCurrency = pandas.read_csv("Data/updatedHarvest.csv", sep=',', parse_dates=['Date'])
 df_heistCurrency = pandas.read_csv("Data/updatedHeist.csv", sep=',', parse_dates=['Date'])
 df_ritualCurrency = pandas.read_csv("Data/updatedRitual.csv", sep=',', parse_dates=['Date'])
 
@@ -19,7 +22,7 @@ df_ritualCurrency = pandas.read_csv("Data/updatedRitual.csv", sep=',', parse_dat
 
 
 
-df_allLeagueCurrency = pandas.concat([df_ritualCurrency, df_heistCurrency])
+df_allLeagueCurrency = pandas.concat([df_ritualCurrency, df_heistCurrency, df_harvestCurrency, df_deliriumCurrency, df_metamorphCurrency])
 
 # df_allLeagueItems = pandas.concat([df_ritualItems, df_heistItems])
 

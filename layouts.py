@@ -26,6 +26,9 @@ def currencyLayout():
             options=[
                 {'label': 'Ritual SC', 'value': 'Ritual'},
                 {'label': 'Heist SC', 'value': 'Heist'},
+                {'label': 'Harvest SC', 'value': 'Harvest'},
+                {'label': 'Delirium SC', 'value': 'Delirium'},
+                {'label': 'Metamorph SC', 'value': 'Metamorph'},
             ],
             multi=True,
             value=['Ritual', 'Heist'],
@@ -90,6 +93,9 @@ def catalystLayout():
             options=[
                 {'label': 'Ritual SC', 'value': 'Ritual'},
                 {'label': 'Heist SC', 'value': 'Heist'},
+                {'label': 'Harvest SC', 'value': 'Harvest'},
+                {'label': 'Delirium SC', 'value': 'Delirium'},
+                {'label': 'Metamorph SC', 'value': 'Metamorph'},
             ],
             multi=True,
             value=['Ritual'],
@@ -130,6 +136,9 @@ def breachstoneLayout():
             options=[
                 {'label': 'Ritual SC', 'value': 'Ritual'},
                 {'label': 'Heist SC', 'value': 'Heist'},
+                {'label': 'Harvest SC', 'value': 'Harvest'},
+                {'label': 'Delirium SC', 'value': 'Delirium'},
+                {'label': 'Metamorph SC', 'value': 'Metamorph'},
             ],
             multi=True,
             value=['Ritual'],
